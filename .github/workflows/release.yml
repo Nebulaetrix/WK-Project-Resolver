@@ -1,4 +1,4 @@
-name: Build and Release WPF App
+name: Release WK Project Resolver App
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
 
     - name: Zip release
       run: |
-        powershell Compress-Archive -Path publish\* -DestinationPath release.zip
+        powershell -Command "Compress-Archive -Path publish\* -DestinationPath release.zip"
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
