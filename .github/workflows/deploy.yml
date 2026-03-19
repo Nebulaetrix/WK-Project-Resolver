@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 env:
-  PROJECT_PATH: WKPRojectSolver/WKProjectSolver.csproj
+  PROJECT_PATH: WKProjectSolver/WKProjectSolver.csproj
 
 jobs:
   build:
@@ -24,14 +24,8 @@ jobs:
       with:
         dotnet-version: '10.0.x'
 
-    - name: Restore
-      run: dotnet restore ${{ env.PROJECT_PATH }}
-
-    - name: Build app
-      run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
-
     - name: Publish app
-      run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
+      run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o publish
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
