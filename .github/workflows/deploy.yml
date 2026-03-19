@@ -1,9 +1,12 @@
-name: Release WK Project Resolver App
+name: Deploy WK Project Resolver
 
 on:
   push:
     tags:
       - 'v*'
+
+env:
+  PROJECT_PATH: WKPRojectSolver/WKProjectSolver.csproj
 
 jobs:
   build:
@@ -22,18 +25,17 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore
-      run: dotnet restore
+      run: dotnet restore ${{ env.PROJECT_PATH }}
+
+    - name: Build app
+      run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
 
     - name: Publish app
-      run: dotnet build
-
-    - name: Zip release
-      run: |
-        powershell -Command "Compress-Archive -Path publish\* -DestinationPath release.zip"
+      run: dotnet publish ${{ env.PROJECT_PATH }} -c Release --self-contained -r win-x64 -p:PublishSingleFile=true --no-build
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
-        files: release.zip
+        files: publish/**
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
