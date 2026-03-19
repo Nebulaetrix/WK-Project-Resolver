@@ -6,12 +6,6 @@
         <UseWPF>true</UseWPF>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-        <SelfContained>true</SelfContained>
-        <PublishSingleFile>true</PublishSingleFile>
-        <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-        <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
 
         <DebugType>none</DebugType>
         <DebugSymbols>false</DebugSymbols>
@@ -33,12 +27,6 @@
 
     <ItemGroup>
         <Compile Remove="Scripts\ProjectFixer.cs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Page Update="App.xaml">
-        <Generator>MSBuild:Compile</Generator>
-      </Page>
     </ItemGroup>
 
 </Project>

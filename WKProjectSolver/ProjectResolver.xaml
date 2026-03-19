@@ -1,7 +1,7 @@
-﻿<Window x:Class="WKProjectSolver.MainWindow"
+﻿<Window x:Class="WKProjectSolver.ProjectResolver"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="WK Project Solver" Height="450" Width="800">
+        Title="Project Resolver" Height="450" Width="800">
 
     <Grid Margin="20">
 

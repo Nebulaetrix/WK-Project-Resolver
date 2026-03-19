@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
-
+using System.Windows.Markup;
 using Microsoft.Win32;
 using Path = System.IO.Path;
 
@@ -11,9 +11,9 @@ namespace WKProjectSolver;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow
+public partial class ProjectResolver : Window
 {
-    public MainWindow()
+    public ProjectResolver()
     {
         InitializeComponent();
     }
@@ -62,8 +62,11 @@ public partial class MainWindow
         // Add input files
         CopyInputFiles(unityFolder);
 
-        Copy_File(Path.Combine(Directory.GetCurrentDirectory(), "Scripts", "ProjectFixer.cs"), Path.Combine(unityFolder, "Assets", "Editor"));
-        AddedScript.IsChecked = true;
+        if (Copy_File(Path.Combine(Directory.GetCurrentDirectory(), "Scripts", "ProjectFixer.cs"),
+                Path.Combine(unityFolder, "Assets", "Editor")))
+        {
+            AddedScript.IsChecked = true;
+        }
 
         MessageBox.Show("Project resolve successful.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
     }
@@ -132,7 +135,7 @@ public partial class MainWindow
         
         if (!Directory.Exists(destDir))
         {
-            Log($"File {destDir} does not exist.");
+            Log($"Folder {destDir} does not exist.");
             return false;
         }
 
@@ -154,10 +157,5 @@ public partial class MainWindow
         File.Delete(path);
         Log($"Deleted {path}");
         return true;
-    }
-
-    public void Connect(int connectionId, object target)
-    {
-        throw new NotImplementedException();
     }
 }
